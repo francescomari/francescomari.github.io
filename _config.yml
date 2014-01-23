@@ -1,0 +1,12 @@
+name: Francesco Mari
+description: Personal opinions only
+meta_description: "Francesco Mari, personal opinions only"
+
+markdown: redcarpet
+pygments: true
+logo: false
+paginate: 15
+
+# Details for the RSS feed generator
+url:            'https://francescomari.github.io'
+author:         'Francesco Mari'
