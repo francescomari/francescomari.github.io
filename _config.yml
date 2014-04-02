@@ -7,6 +7,5 @@ pygments: true
 logo: false
 paginate: 15
 
-# Details for the RSS feed generator
-url:            'https://francescomari.github.io'
-author:         'Francesco Mari'
+url: 'https://francescomari.github.io'
+author: 'Francesco Mari'
