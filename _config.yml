@@ -1,6 +1,6 @@
 name: Francesco Mari
-description: Personal opinions only
-meta_description: "Francesco Mari, personal opinions only"
+description: "I smell code"
+meta_description: "Personal blog of Francesco Mari"
 
 markdown: redcarpet
 pygments: true
