@@ -38,7 +38,7 @@ In the project I described above there are about 420 occurrences of "public clas
 
 ## The build is not reproducible
 
-*With a big number of project it is really difficult to reproduce a particular build. There are too many possible combinations of bundles to be sure that everything is working as expected. We lose support from the compiler.*
+*With a big number of project it is really difficult to reproduce a particular build. There are too many possible combinations of bundles to be sure that everything is working as expected. We loose support from the compiler.*
 
 Being the project a single, monolithic bundle, developers are used to make some small changes, recompile everything and hope that the compiler doesn't shout at them. This approach is not so bad because the compiler is smart and should be trusted. Modularization just brings this concept to a new level of reliability.
 
@@ -48,7 +48,7 @@ When you are working in a specific bundle, you can still trust the compiler as u
 
 You can't have these checks if everything is in the same monolithic bundle. Sure, if you add a method to an interface, something will break the build. But there is more to your project than the code you are writing, and you also have to think about the users of your code. You can't be a selfish developer and just think about how simple your workflow should be.
 
-## We need to have flexible deployments
+## We need flexible deployments
 
 *If we have everything in one bundle, we can deploy all the fixes at the same time. Having many bundles just makes everything more complicated, because you have too many deployment units.*
 
