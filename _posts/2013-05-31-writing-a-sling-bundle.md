@@ -4,11 +4,16 @@ title:  "Writing a Sling bundle"
 date:   2013-05-31
 ---
 
-Sling is a web framework built on top of OSGi. Every addition to the framework, be it your own application or an extension to the framework itself, is packaged and installed as a bundle. This article tries to explain the basic steps to go up and running with your first Sling bundle.
+Sling is a web framework built on top of OSGi. Every addition to the framework,
+be it your own application or an extension to the framework itself, is packaged
+and installed as a bundle. This article tries to explain the basic steps to go
+up and running with your first Sling bundle.
 
 ## Set up the Maven project
 
-The build system of choice for Sling itself is Maven. Some Sling-related Maven plugins are maintained by the Sling community, and a lot of other plugins exist to create OSGi bundles or to generate descriptors for OSGi components.
+The build system of choice for Sling itself is Maven. Some Sling-related Maven
+plugins are maintained by the Sling community, and a lot of other plugins exist
+to create OSGi bundles or to generate descriptors for OSGi components.
 
 The minimal POM file for a bundle is the following.
 
@@ -39,9 +44,17 @@ The minimal POM file for a bundle is the following.
 </project>
 {% endhighlight %}
 
-This POM loads Maven lifecycle extensions of the [Maven Bundle Plugin](http://felix.apache.org/site/apache-felix-maven-bundle-plugin-bnd.html) to provide a new packaging, bundle. If you use this packaging you will ask the Maven Bundle Plugin to invoke [Bnd](http://www.aqute.biz/Bnd/Bnd), provide a minimal configuration via default Bnd rules, and build an OSGi bundle. The default set of Bnd rules provided by the Maven Bundle Plugin can be found in the Maven Bundle Plugin documentation.
+This POM loads Maven lifecycle extensions of the [Maven Bundle
+Plugin](http://felix.apache.org/site/apache-felix-maven-bundle-plugin-bnd.html)
+to provide a new packaging, bundle. If you use this packaging you will ask the
+Maven Bundle Plugin to invoke [Bnd](http://www.aqute.biz/Bnd/Bnd), provide a
+minimal configuration via default Bnd rules, and build an OSGi bundle. The
+default set of Bnd rules provided by the Maven Bundle Plugin can be found in the
+Maven Bundle Plugin documentation.
 
-Default Bnd rules are reasonable enough, but you can always override them by adding an `<instructions>` section in the plugin configuration, as show in this snippet.
+Default Bnd rules are reasonable enough, but you can always override them by
+adding an `<instructions>` section in the plugin configuration, as show in this
+snippet.
 
 {% highlight xml %}
 <plugin>
@@ -59,7 +72,13 @@ Default Bnd rules are reasonable enough, but you can always override them by add
 
 ## Write an OSGi component
 
-Sling development is based on OSGi. Extending Sling often involves the creation of new OSGi components. The process of declaring new components and including them in your OSGi bundle can be automated by using the [Maven SCR Plugin](http://felix.apache.org/documentation/subprojects/apache-felix-maven-scr-plugin.html) and the [SCR annotations](http://felix.apache.org/documentation/subprojects/apache-felix-maven-scr-plugin/scr-annotations.html).
+Sling development is based on OSGi. Extending Sling often involves the creation
+of new OSGi components. The process of declaring new components and including
+them in your OSGi bundle can be automated by using the [Maven SCR
+Plugin](http://felix.apache.org/documentation/subprojects/apache-felix-maven-
+scr-plugin.html) and the [SCR
+annotations](http://felix.apache.org/documentation/subprojects/apache-felix-
+maven-scr-plugin/scr-annotations.html).
 
 The minimal code for a component is the following.
 
@@ -82,15 +101,32 @@ public class MyComponent {
 }
 {% endhighlight %}
 
-This component has some interesting characteristics. First, the only mandatory annotation is `@Component`. This qualifies the class as a new component to install into the OSGi container. Second, the `@Activate` and `@Deactivate` annotations mark methods that will be called during the component lifecycle.
+This component has some interesting characteristics. First, the only mandatory
+annotation is `@Component`. This qualifies the class as a new component to
+install into the OSGi container. Second, the `@Activate` and `@Deactivate`
+annotations mark methods that will be called during the component lifecycle.
 
-Also note that in Sling using the built-in logging support is as easy as creating a new SLF4J Logger object.
+Also note that in Sling using the built-in logging support is as easy as
+creating a new SLF4J Logger object.
 
-If your component implements an OSGi service, you will use the `@Service` class annotation to declare the implemented interface. To reference services provided by other OSGi bundles (or by your own bundle, too), you will use the @Reference annotation. To get further information about providing and referencing services, have a look at the [SCR Annotations](http://felix.apache.org/documentation/subprojects/apache-felix-maven-scr-plugin/scr-annotations.html) project.
+If your component implements an OSGi service, you will use the `@Service` class
+annotation to declare the implemented interface. To reference services provided
+by other OSGi bundles (or by your own bundle, too), you will use the @Reference
+annotation. To get further information about providing and referencing services,
+have a look at the [SCR
+Annotations](http://felix.apache.org/documentation/subprojects/apache-felix-
+maven-scr-plugin/scr-annotations.html) project.
 
-To make the OSGi components available to the underlying framework, make sure to add to your POM the [Maven SCR Plugin](http://felix.apache.org/documentation/subprojects/apache-felix-maven-scr-plugin.html). This plugin will do all the tedious work required to declare and package your OSGi components. It will scan your source code for SCR annotations, generate XML component descriptors and add manifest headers to declare the generated descriptors inside the bundle.
+To make the OSGi components available to the underlying framework, make sure to
+add to your POM the [Maven SCR
+Plugin](http://felix.apache.org/documentation/subprojects/apache-felix-maven-
+scr-plugin.html). This plugin will do all the tedious work required to declare
+and package your OSGi components. It will scan your source code for SCR
+annotations, generate XML component descriptors and add manifest headers to
+declare the generated descriptors inside the bundle.
 
-To compile your code you have to include a dependency to the SCR annotations project.
+To compile your code you have to include a dependency to the SCR annotations
+project.
 
 {% highlight xml %}
 <dependency>
@@ -100,7 +136,8 @@ To compile your code you have to include a dependency to the SCR annotations pro
 </dependency>
 {% endhighlight %}
 
-To generate descriptors and link them to the manifest file, you have to run the scr goal of the Maven SCR Plugin.
+To generate descriptors and link them to the manifest file, you have to run the
+scr goal of the Maven SCR Plugin.
 
 {% highlight xml %}
 <plugin>
@@ -119,7 +156,12 @@ To generate descriptors and link them to the manifest file, you have to run the 
 
 ## Install the bundle
 
-To test your bundle you have to deploy it to a running Sling instance. The whole process can be automated by using the [Sling Maven Plugin](http://sling.apache.org/site/sling.html). More precisely, you have to execute the install goal and provide information about the running instance’s URL, and the credentials for the deployer user. An example of the usage of the plugin is shown below.
+To test your bundle you have to deploy it to a running Sling instance. The whole
+process can be automated by using the [Sling Maven
+Plugin](http://sling.apache.org/site/sling.html). More precisely, you have to
+execute the install goal and provide information about the running instance’s
+URL, and the credentials for the deployer user. An example of the usage of the
+plugin is shown below.
 
 {% highlight xml %}
 <plugin>
