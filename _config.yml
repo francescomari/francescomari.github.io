@@ -2,7 +2,7 @@ name: Francesco Mari
 description: "Personal blog"
 meta_description: "Personal blog of Francesco Mari"
 
-markdown: redcarpet
+markdown: kramdown
 highlighter: pygments
 logo: false
 paginate: 15
