@@ -3,7 +3,7 @@ description: "Personal blog"
 meta_description: "Personal blog of Francesco Mari"
 
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
 logo: false
 paginate: 15
 
