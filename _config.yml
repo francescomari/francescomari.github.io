@@ -6,6 +6,7 @@ markdown: kramdown
 highlighter: rouge
 logo: false
 paginate: 15
+exclude: ["Gemfile", "Gemfile.lock", "CNAME"]
 
 url: 'https://francescomari.github.io'
 author: 'Francesco Mari'
