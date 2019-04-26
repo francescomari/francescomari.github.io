@@ -8,5 +8,5 @@ logo: false
 paginate: 15
 exclude: ["Gemfile", "Gemfile.lock", "CNAME"]
 
-url: 'https://francescomari.github.io'
+baseurl: 'https://francesco.site'
 author: 'Francesco Mari'
