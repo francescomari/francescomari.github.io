@@ -62,7 +62,7 @@ segment identified by the segment field. There are some peculiarities in both
 the segment and the position field that may not be immediately obvious. The
 picture below shows how a segment looks like.
 
-![Overview of a segment](/assets/images/segment.png)
+<img src="/assets/images/segment.png" class="img-fluid" alt="Overview of a segment">
 
 The segment field is just one byte long, but a segment identifier is 16 bytes
 long. To bridge the gap, the segment header contains an array of segment

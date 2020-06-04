@@ -1,12 +1,6 @@
-name: Francesco Mari
-description: "Personal blog"
-meta_description: "Personal blog of Francesco Mari"
+paginate: 5
+paginate_path: "/page/:num/"
 
-markdown: kramdown
-highlighter: rouge
-logo: false
-paginate: 15
 exclude: ["Gemfile", "Gemfile.lock", "CNAME"]
 
-url: 'https://francesco.site'
-author: 'Francesco Mari'
+title: "Francesco's blog"

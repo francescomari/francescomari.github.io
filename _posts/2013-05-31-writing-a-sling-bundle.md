@@ -17,7 +17,7 @@ to create OSGi bundles or to generate descriptors for OSGi components.
 
 The minimal POM file for a bundle is the following.
 
-{% highlight xml %}
+```
 <project>
     <modelVersion>4.0.0</modelVersion>
      
@@ -42,7 +42,7 @@ The minimal POM file for a bundle is the following.
         </plugins>
     </build>
 </project>
-{% endhighlight %}
+```
 
 This POM loads Maven lifecycle extensions of the [Maven Bundle
 Plugin](http://felix.apache.org/site/apache-felix-maven-bundle-plugin-bnd.html)
@@ -56,7 +56,7 @@ Default Bnd rules are reasonable enough, but you can always override them by
 adding an `<instructions>` section in the plugin configuration, as show in this
 snippet.
 
-{% highlight xml %}
+```
 <plugin>
     <groupId>org.apache.felix</groupId>
     <artifactId>maven-bundle-plugin</artifactId>
@@ -68,7 +68,7 @@ snippet.
         </instruction>
     </configuration>
 </plugin>
-{% endhighlight %}
+```
 
 ## Write an OSGi component
 
@@ -82,7 +82,7 @@ maven-scr-plugin/scr-annotations.html).
 
 The minimal code for a component is the following.
 
-{% highlight java %}
+```
 @Component
 public class MyComponent {
  
@@ -99,7 +99,7 @@ public class MyComponent {
     }
  
 }
-{% endhighlight %}
+```
 
 This component has some interesting characteristics. First, the only mandatory
 annotation is `@Component`. This qualifies the class as a new component to
@@ -128,18 +128,18 @@ declare the generated descriptors inside the bundle.
 To compile your code you have to include a dependency to the SCR annotations
 project.
 
-{% highlight xml %}
+```
 <dependency>
     <groupId>org.apache.felix</groupId>
     <artifactId>org.apache.felix.scr.annotations</artifactId>
     <version>1.9.2</version>
 </dependency>
-{% endhighlight %}
+```
 
 To generate descriptors and link them to the manifest file, you have to run the
 scr goal of the Maven SCR Plugin.
 
-{% highlight xml %}
+```
 <plugin>
     <groupId>org.apache.felix</groupId> 
     <artifactId>maven-scr-plugin</artifactId>
@@ -152,7 +152,7 @@ scr goal of the Maven SCR Plugin.
         </execution>
     </executions>
 </plugin>
-{% endhighlight %}
+```
 
 ## Install the bundle
 
@@ -163,7 +163,7 @@ execute the install goal and provide information about the running instance’s
 URL, and the credentials for the deployer user. An example of the usage of the
 plugin is shown below.
 
-{% highlight xml %}
+```
 <plugin>
     <groupId>org.apache.sling</groupId>
     <artifactId>maven-sling-plugin</artifactId>
@@ -182,4 +182,4 @@ plugin is shown below.
         </execution>
     </executions>
 </plugin>
-{% endhighlight %}
+```

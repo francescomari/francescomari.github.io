@@ -13,7 +13,7 @@ Creating option objects for these methods, though, is a different story. The
 task is often simple and repetitive and it is often overlooked during the day-
 to-day development. It is common to see code like that spread over your program:
 
-{% highlight js %}
+```
 function searchUsers(user, password, name, age, done) {
   var options = {
     auth: {
@@ -36,7 +36,7 @@ function searchUsers(user, password, name, age, done) {
 
   request(options, done);
 }
-{% endhighlight %}
+```
 
 It is pretty clear that this method is performing a POST request to a well known
 URL to search for users, optionally providing a name and an age to narrow the
@@ -63,7 +63,7 @@ Tho solve the first problem you could encapsulate option assignment in different
 functions. Every function receives an option object and modifies it, as shown in
 the following code snippet.
 
-{% highlight js %}
+```
 function setAuth(options, user, password) {
   options.auth = { user: user, password: password };
 }
@@ -81,11 +81,11 @@ function addParameter(options, name, value) {
   form[name] = value;
   options.form = form;
 }
-{% endhighlight %}
+```
 
 This brings our original method to the next level.
 
-{% highlight js %}
+```
 function searchUsers(user, password, name, age, done) {
   var options = {};
 
@@ -103,7 +103,7 @@ function searchUsers(user, password, name, age, done) {
   
   request(options, done);
 }
-{% endhighlight %}
+```
 
 This solves the very first problem in our bullet list. You avoided every
 possible spelling mistake during the construction of the `option` object.
@@ -114,7 +114,7 @@ You can apply an additional improvement to the previous code by eliminating the
 two `if` statements. It is as easy as writing a more specialized function to
 change the option object.
 
-{% highlight js %}
+```
 function addParameterIf(options, condition, name, value) {
   if (condition) {
     var form = options.form || {};
@@ -122,11 +122,11 @@ function addParameterIf(options, condition, name, value) {
     options.form = form;
   }
 }
-{% endhighlight %}
+```
 
 This makes the function code shorter and clearer.
 
-{% highlight js %}
+```
 function searchUsers(user, password, name, age, done) {
   var options = {};
 
@@ -138,7 +138,7 @@ function searchUsers(user, password, name, age, done) {
 
   request(options, done);
 }
-{% endhighlight %}
+```
 
 ## Stretch it a little bit more
 
@@ -155,12 +155,12 @@ a bad thing for your computer.
 
 What if each helper function had the same semantic?
 
-{% highlight js %}
+```
 function setSomething(options) {
   // Do something
   return options;
 }
-{% endhighlight %}
+```
 
 If every helper function was written like this, you could execute all of them in
 order and pass the `options` parameter from one function to the other, until all
@@ -170,7 +170,7 @@ You can change your previous helper function to generate functions of this type,
 instead of directly accessing the options object. They will just create a
 closure for other functions which perform the actual work. Let's give it a shot.
 
-{% highlight js %}
+```
 function setAuth() {
   return function (options) {
     options.auth = getAuth();
@@ -202,7 +202,7 @@ function addParameterIf(condition, name, value) {
     return options;
   };
 }
-{% endhighlight %}
+```
 
 Note that I changed the logic of the `setAuth()` function. This implementation
 require an external method to provide the `auth` parameter to be set in the
@@ -210,7 +210,7 @@ require an external method to provide the `auth` parameter to be set in the
 the parameter list of your functions. By applying the previous modification, you
 will end up with the code shown below.
 
-{% highlight js %}
+```
 function searchUsers(name, age, done) {
   var operations = [
     setAuth(),
@@ -228,7 +228,7 @@ function searchUsers(name, age, done) {
   
   request(options, done);
 }
-{% endhighlight %}
+```
 
 Please note that the operations array is a sequence of functions, and each of
 them has the same signature: they all receive an option object in input and
@@ -249,7 +249,7 @@ callback. Moreover, the callback is always the last parameter of the function.
 The only information left in the original function, at the end of the
 transformation, will be this:
 
-{% highlight js %}
+```
 function searchUsers(name, age) {
   return [
     setAuth(),
@@ -259,14 +259,14 @@ function searchUsers(name, age) {
     addParameterIf(age !== null, 'age', age)
   ];
 }
-{% endhighlight %}
+```
 
 What you have to write is a generator which takes something like that in input
 and generates a working function as output. Writing such a generator, as shown
 below, is a very simple task which requires only a little bit of juggling with
 the `arguments` special variable.
 
-{% highlight js %}
+```
 function createFullMethod(partialMethod) {
   return function () {
     var args = Array.slice.call(arguments);
@@ -281,7 +281,7 @@ function createFullMethod(partialMethod) {
     request(options, done);
   };
 }
-{% endhighlight %}
+```
 
 The `createFullMethod()` function creates a new function. The arguments of this
 function will be evaluated dinamically, and the number of arguments can be
@@ -304,7 +304,7 @@ to your original one with a minimum effort. Let's see how you would now rewrite
 the original function and how we would use the same API to also create a
 different remote function.
 
-{% highlight js %}
+```
 var searchUsers = createFullMethod(function (name, age) {
   return [
     setAuth(),
@@ -321,7 +321,7 @@ var readLatestStats = createFullMethod(function () {
     setMethod('GET')
   ];
 });
-{% endhighlight %}
+```
 
 ## Conclusions
 

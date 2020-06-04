@@ -15,7 +15,7 @@ I come from a Java background, and when I write some JavaScript code it feels
 natural to model my objects using an OOP approach. In the first draft of my code
 I usually end up with something like that:
 
-{% highlight js %}
+```
 function Person(name) {
   this.name = name;
   this.age = null;
@@ -32,7 +32,7 @@ Person.prototype.getAge = function () {
 Person.prototype.setAge = function (age) {
   this.age = age;
 };
-{% endhighlight %}
+```
 
 There is nothing wrong about this approach, especially if you plan to attach
 some real behaviour to the prototype later. At the moment, though, I see two
@@ -56,7 +56,7 @@ a real private space to save the internal state of the objects. Instead of using
 classes and constructors, you can implement the creation logic of your object as
 a plain function:
 
-{% highlight js %}
+```
 function createPerson(name) {
   var age = null;
 
@@ -72,7 +72,7 @@ function createPerson(name) {
     }
   };
 }
-{% endhighlight %}
+```
 
 There is no way to access the real values of the name and the age of the newly
 created person, and access restrictions and validation policies can be
@@ -86,7 +86,7 @@ simple properties of an object! This is possible, according to the ES5
 specification, using the `Object.create()` method. The previous example, when
 converted to the prototypal approach, looks like this:
 
-{% highlight js %}
+```
 function createPerson(name) {
   var age = null;
 
@@ -107,7 +107,7 @@ function createPerson(name) {
     }
   });
 }
-{% endhighlight %}
+```
 
 Now you fulfilled every requirement: your object has a real private state thanks
 to a closure, and accessing your data is as simple as reading or writing a
@@ -133,21 +133,21 @@ I have to admit that I’m not a big fan of the approach described in the previo
 section, unless it’s not strictly required. I would better prefer to use naked
 data:
 
-{% highlight js %}
+```
 var person = {
   name: 'Benny',
   age: 65
 };
-{% endhighlight %}
+```
 
 Your data is there and it’s readable. But what about the access restrictions? If
 a piece of code should not read your data, you can always create a restricted
 representation of it, in the same way a database view restricts the access to
 the columns in a table.
 
-{% highlight js %}
+```
 var restricted = _.pick(person, 'name');
-{% endhighlight %}
+```
 
 In the previous example I used a method defined in the Lo-Dash library for
 clarity. The `pick()` method creates a shallow clone of the `person` object,
@@ -175,7 +175,7 @@ I don’t want to bother you with functional programming concepts, because I
 prefer to show you how easy can be to manipulate plain data using a little bit
 of functional magic.
 
-{% highlight js %}
+```
 function getName(person) {
   return person.name;
 }
@@ -190,7 +190,7 @@ var people = [
 ];
 
 names(people); // -> ['John', 'Paul'] 
-{% endhighlight %}
+```
 
 This approach, of course, works even if you don’t adhere to the naked data
 philosophy. You have to admit, though, that it looks very natural to write this
@@ -198,7 +198,7 @@ kind of code if you only have to bother about plain data. The previous approach
 can also be generalised by providing more flexible functions. What happens if
 you encapsulate the attribute access code in its own function?
 
-{% highlight js %}
+```
 function get(property, object) {
   return object[property];
 }
@@ -206,7 +206,7 @@ function get(property, object) {
 function names(people) {
   return people.map(get.bind(‘name’));
 }
-{% endhighlight %}
+```
 
 In the previous example you have a very general function, get, which can be
 reused in a very broad set of different contexts. As I told you before, this is

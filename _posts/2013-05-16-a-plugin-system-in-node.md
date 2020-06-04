@@ -73,10 +73,10 @@ Grunt has a full featured plugin system to load new tasks. Tasks can be loaded
 from a directory or from locally installed NPM packages. To load new tasks
 inside your `Gruntfile.js` you execute code similar to the following:
 
-{% highlight js %}
+```
 grunt.loadTasks(folder);
 grunt.loadNpmTasks(packageName);
-{% endhighlight %}
+```
 
 The code which loads new tasks can be found in `lib/grunt/task.js`. This module
 contains the implementation of the methods `loadTasks()` and `loadNpmTasks()`
@@ -85,12 +85,12 @@ Let’s analyze first how Grunt loads new tasks from files. The bulk of the logi
 is contained in the `loadTask()` method and, in particular, in the following
 section of code:
 
-{% highlight js %}
+```
 fn = require(path.resolve(filepath));
 if (typeof fn === 'function') {
   fn.call(grunt, grunt);
 }
-{% endhighlight %}
+```
 
 In this snippet of code, `filepath` is an absolute path to a file. Grunt uses
 the standard `resolve()` function to load and evaluate the content of the file,
@@ -105,7 +105,7 @@ the `node_modules` folder in which modules are locally installed. The following
 code is the whole implementation of the `loadNpmTasks()` function. I will
 explain it in detail.
 
-{% highlight js %}
+```
 task.loadNpmTasks = function(name) {
   loadTasksMessage('"' + name + '" local Npm module');
   var root = path.resolve('node_modules');
@@ -139,7 +139,7 @@ task.loadNpmTasks = function(name) {
     grunt.log.error('Local Npm module "' + name + '" not found. Is it installed?');
   }
 };
-{% endhighlight %}
+```
 
 The first step is to load the `package.json` file in a directory named
 `node_modules/<name>`, relative to the current working directory. If this file
@@ -156,7 +156,7 @@ take a look at a typical meta-task’s `package.json` file. Following is the
 `package.json` file of the `grunt-contrib` package. Please pay attention to the
 `"dependencies"` and `"keywords"` section.
 
-{% highlight json %}
+```
 {
   "name": "grunt-contrib",
   "description": "The entire grunt-contrib suite.",
@@ -222,7 +222,7 @@ take a look at a typical meta-task’s `package.json` file. Following is the
     "gruntcollection"
   ]
 }
-{% endhighlight %}
+```
 
 Reading the `"dependencies"` section is a trivial task once the `package.json`
 file is parsed, because it is only an object containing package names as keys
