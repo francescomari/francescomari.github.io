@@ -92,7 +92,7 @@ func run(args []string) int {
 
 `run()` is now much easier to test. I can simulate different combinations of
 command line parameters by passing a different `args` slice to it. The
-observable behaviour of the function is now limited to the return code. What if
+observable behavior of the function is now limited to the return code. What if
 I want to assert whether specific messages are printed under certain
 circumstances? Surely I can replace `os.Stdin` and `os.Stderr` with something
 that captures the output of `run()`, but changing global state can introduce
@@ -145,9 +145,9 @@ This test invokes `run()` with a command line that contains only the executable
 name and no other parameters, and asserts that `run()` returns with a non-zero
 exit code. Since I'm not interested in what is printed to stdout, I pass
 `ioutil.Discard` to `run()` in place of the `stdout` parameter. The usage should
-be printed on `stderr`, so I create a `strings.Builder` (which implementes the
+be printed on `stderr`, so I create a `strings.Builder` (which implements the
 `io.Writer` interface) and pass it in place of the `stderr` parameter. At the
-end of the test, I assert that the output caputred by the `strings.Builder` is
+end of the test, I assert that the output captured by the `strings.Builder` is
 the one I expect.
 
 Looking closely at the `run()` function, I created a small abstraction over the
