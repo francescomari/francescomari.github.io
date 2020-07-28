@@ -4,4 +4,3 @@ paginate_path: "/page/:num/"
 exclude: ["Gemfile", "Gemfile.lock", "CNAME"]
 
 title: "Francesco's blog"
-theme: jekyll-theme-slate
