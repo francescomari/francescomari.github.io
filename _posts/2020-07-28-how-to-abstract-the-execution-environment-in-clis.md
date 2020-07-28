@@ -4,7 +4,7 @@ title: How to abstract the execution environment in CLIs
 date: 2020-07-28
 ---
 
-Whenever I write CLIs in Go I find useful to create an abstaction between the
+Whenever I write CLIs in Go I find useful to create an abstraction between the
 logic of the CLI from the details of the execution environment. This post
 describes how to create such an abstraction to improve the testability of the
 CLI code.
