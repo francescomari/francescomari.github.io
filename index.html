@@ -1,30 +1,14 @@
 ---
 layout: default
-title: Francesco's blog
 ---
 
-{% for post in paginator.posts %}
-<div class="media">
-    <div class="media-body">
-        <h5><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h5>
-        <p>{{ post.excerpt }}</p>
-    </div>
-</div>
-{% endfor %}
-
-
-<ul class="blog-pagination pagination justify-content-center">
-    {% if paginator.previous_page %}
-    <li class="page-item"><a class="page-link" href="{{ paginator.previous_page_path }}">&laquo;</a></li>
-    {% else %}
-    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-    {% endif %}
-
-    <li class="page-item"><a class="page-link" href="#">{{paginator.page}} / {{paginator.total_pages}}</a></li>
-
-    {% if paginator.next_page %}
-    <li class="page-item"><a class="page-link" href="{{ paginator.next_page_path }}">&raquo;</a></li>
-    {% else %}
-    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-    {% endif %}
-</ul>
+<section class="posts">
+    <ul>
+        {% for post in site.posts %}
+        <li>
+            <a href="{{ post.url }}">{{ post.title }}</a>
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%m-%d-%Y" }}</time>
+        </li>
+        {% endfor %}
+    </ul>
+</section>

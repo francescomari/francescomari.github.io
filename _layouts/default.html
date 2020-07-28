@@ -4,58 +4,244 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
-    <title>{{ site.title }}</title>
 
     <style>
-        .container {
-            max-width: 720px;
+        *,
+        :after,
+        :before {
+            box-sizing: border-box;
+            background-color: inherit;
+            color: inherit;
+            margin: 0;
+            padding: 0
         }
 
-        .blog-header {
-            margin-top: 3rem;
-            margin-bottom: 3rem;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'avenir next', avenir, helvetica, 'helvetica neue', ubuntu, roboto, noto, 'segoe ui', arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            line-height: 1.5;
+            font-size: 1rem;
+            color: #16171a
         }
 
-        .blog-pagination {
-            margin-top: 3rem;
-            margin-bottom: 3rem;
+        nav ul {
+            border-right: 1px solid #edf2f7
         }
 
-        .blog-footer {
-            margin-top: 3rem;
+        a {
+            color: #000;
+            text-decoration-skip-ink: auto;
+            text-decoration: underline
         }
 
         pre {
-            font-size: 0.75rem;
-            margin-left: 2rem;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
+            margin: .5rem 0;
+            padding: .5rem
+        }
+
+        .post p {
+            margin: .5rem 0
+        }
+
+        .post h1,
+        .post h2,
+        .post h3,
+        .post h4 {
+            margin: 1rem 0
+        }
+
+        .post h2:first-child,
+        .project h2:first-child,
+        .photo h2:first-child {
+            margin-top: 0
+        }
+
+        .meta {
+            margin: 2rem 0
+        }
+
+        code,
+        pre {
+            background: #ecedee
         }
 
         code {
-            font-size: 0.75rem;
+            padding: .1rem
+        }
+
+        pre code {
+            border: none
+        }
+
+        pre {
+            padding: 1rem;
+            overflow-x: auto
+        }
+
+        img {
+            max-width: 100%
+        }
+
+        hr {
+            background: #000;
+            height: 1px;
+            border: 0
+        }
+
+        header {
+            flex-basis: 10rem;
+            flex-grow: 1;
+            position: relative
+        }
+
+        header a {
+            text-decoration: none
+        }
+
+        header li {
+            margin-bottom: .2rem;
+            text-align: right;
+            margin-right: 2rem
+        }
+
+        header a.active {
+            font-weight: bold
+        }
+
+        header,
+        section {
+            padding: 1rem
+        }
+
+        blockquote {
+            font-style: italic;
+            border-left: 5px solid #ececec;
+            padding-left: 1rem
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            line-height: 1;
+            margin: 1rem 0;
+            font-weight: 600
+        }
+
+        section h1:first-child {
+            margin-top: 0
+        }
+
+        strong,
+        b {
+            font-weight: bold
+        }
+
+        .photos ul {
+            list-style: none
+        }
+
+        .photos li {
+            margin-bottom: 1.5rem
+        }
+
+        .photo picture,
+        .project picture {
+            margin-bottom: 0.5rem
+        }
+
+        .posts ul,
+        header ul {
+            list-style: none
+        }
+
+        .posts li {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: .5rem
+        }
+
+        .posts li a,
+        .posts li div,
+        .projects li a {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-decoration: none
+        }
+
+        .posts li time,
+        .projects li time {
+            padding-left: 1rem;
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums
+        }
+
+        .post ul,
+        .project ul,
+        .post ol {
+            padding-left: 3rem;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 60rem;
+            margin: 2rem auto;
+            padding: 1rem
+        }
+
+        @media screen and (max-width: 45rem) {
+            header li {
+                display: inline;
+                margin-right: 1rem
+            }
+
+            .logo {
+                padding-bottom: 1rem
+            }
+
+            header ul {
+                border-bottom: 1px solid #edf2f7;
+                padding-bottom: 2rem
+            }
+
+            nav ul {
+                border-right: 0px
+            }
+
+            .photos ul {
+                margin-top: 0.5rem
+            }
+        }
+
+        section {
+            flex-basis: 0;
+            flex-grow: 999;
+            min-width: 70%;
+            display: flex;
+            flex-direction: column
         }
     </style>
+
+    <title>{{ site.title }}</title>
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="blog-header">{{ page.title }}</h1>
-
+    <main>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="/" {% if page.url == "/" %}class="active" {% endif %}>Home</a></li>
+                    <li><a href="/about" {% if page.url == "/about.html" %}class="active" {% endif %}>About</a></li>
+                </ul>
+            </nav>
+        </header>
         {{ content }}
-
-
-        <div class="blog-footer text-center">
-            <p>
-                <small>
-                    All content copyright <a href="https://twitter.com/frm1025">Francesco Mari</a>
-                    &copy;{{ site.time | date: '%Y' }}.
-                    All rights reserved.
-                </small>
-            </p>
-        </div>
-    </div>
+    </main>
 </body>
 
 </html>

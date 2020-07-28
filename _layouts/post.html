@@ -2,15 +2,12 @@
 layout: default
 ---
 
-{{content}}
+<section class="post">
+    <h1>{{ page.title }}</h1>
 
-<div class="blog-footer text-right">
-    <h6>Francesco Mari, {{ page.date | date_to_string }}</h6>
-    <p>
-        <small>
-            Developer, reader, sometimes both at the same time. You can find me on <a
-                href="https://github.com/francescomari">GitHub</a> and <a
-                href="https://twitter.com/frm1025">Twitter</a>.
-        </small>
-    </p>
-</div>
+    {{content}}
+
+    <span class="meta">
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+    </span>
+</section>
